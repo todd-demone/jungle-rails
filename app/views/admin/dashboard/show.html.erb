@@ -1,2 +1,22 @@
-<h1>Admin::Dashboard#show</h1>
-<p>Find me in app/views/admin/dashboard/show.html.erb</p>
+<section class="admin-products-index">
+
+  <header class="page-header">
+    <h1>Admin &raquo; Dashboard</h1>
+  </header>
+  
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <td>Total number of <%= link_to 'products', admin_products_path %> on Jungle</td>
+        <td><%= @products_count %></td>
+      </tr>
+      <tr>
+        <td>Total number of product <%= link_to 'categories', admin_categories_path %> on Jungle</td>
+        <td><%= @categories_count %></td>
+      </tr>
+    </tbody>
+  </table>
+
+</section>
+
+
