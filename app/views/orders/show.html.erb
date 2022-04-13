@@ -18,9 +18,8 @@
         </tr>
       </thead>
       <tbody>
-        <% line_items = LineItem.where(order_id: @order.id)  %>
-        <% line_items.each do |line_item| %>
-          <%= render 'line_item', product_id: line_item[:product_id], quantity: line_item[:quantity].to_i, total_price: (line_item[:total_price_cents] / 100) %>
+        <% @enhanced_line_items.each do |enhanced_line_item| %>
+          <%= render 'line_item', :line_item => enhanced_line_item %> 
         <% end %>
       </tbody>
       <tfoot>

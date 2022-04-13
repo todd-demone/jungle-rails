@@ -2,6 +2,8 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    # Send the show view (and ultimately, the line_item partial) an array containing hashes
+    enhanced_line_items
   end
 
   def create
@@ -54,6 +56,24 @@ class OrdersController < ApplicationController
     end
     order.save!
     order
+  end
+
+  # create a hash for each line_item in an order
+  # the hash contains the product for that line_item and the line_item data
+  def enhanced_line_items
+    # get all line_items for an order
+    @line_items = LineItem.where(order_id: @order.id)
+    # create an array of hashes, each containing data from product and line_item
+    @enhanced_line_items = @line_items.map { |line_item|  
+      # find the product for this line item
+      product = Product.find(line_item[:product_id])
+      # create a hash containing data to be sent to the partial 'line_item'
+      {
+        product: product,
+        quantity: line_item[:quantity].to_i,
+        total_price: line_item[:total_price_cents] / 100.0
+      }
+    }
   end
 
 end
