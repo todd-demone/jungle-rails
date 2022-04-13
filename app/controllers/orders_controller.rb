@@ -65,11 +65,10 @@ class OrdersController < ApplicationController
     @line_items = LineItem.where(order_id: @order.id)
     # create an array of hashes, each containing data from product and line_item
     @enhanced_line_items = @line_items.map { |line_item|  
-      # find the product for this line item
-      product = Product.find(line_item[:product_id])
-      # create a hash containing data to be sent to the partial 'line_item'
-      {
-        product: product,
+    # create a hash containing data to be sent to the partial 'line_item'
+    {
+        # find the product for this line item
+        product: Product.find(line_item[:product_id]),
         quantity: line_item[:quantity].to_i,
         total_price: line_item[:total_price_cents] / 100.0
       }
