@@ -20,6 +20,15 @@ Rails.application.routes.draw do
 
   get 'about', to: 'about#index'
 
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  get '/logout' => 'sessions#destroy'
+  
+  # renders a signup form in the browser
+  get '/signup' => 'users#new'
+  # receives the signup form data and creates a user in the DB with that data
+  post '/users' => 'users#create'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
