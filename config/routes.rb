@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   
   # renders a signup form in the browser
   get '/signup' => 'users#new'
+  # if signup validation catches errors, the url of the errors page is '/users', so we need to redirect any refreshes of that page back to '/signup'
+  get '/users', to: redirect('/signup') 
   # receives the signup form data and creates a user in the DB with that data
   post '/users' => 'users#create'
 
